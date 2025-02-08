@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class Human {
     public String name;
     public String surname;
@@ -7,12 +9,16 @@ public class Human {
     public Human mother;
     public Human father;
     public String[][] schedule;
-    public Human() {}
+
+    public Human() {
+    }
+
     public Human(String name, String surname, int year) {
         this.name = name;
         this.surname = surname;
         this.year = year;
     }
+
     public Human(String name, String surname, int year, Human mother, Human father) {
         this.name = name;
         this.surname = surname;
@@ -20,6 +26,7 @@ public class Human {
         this.mother = mother;
         this.father = father;
     }
+
     public Human(String name, String surname, int year, int iq, Pet pet, Human mother, Human father, String[][] schedule) {
         this.name = name;
         this.surname = surname;
@@ -30,22 +37,45 @@ public class Human {
         this.father = father;
         this.schedule = schedule;
     }
+
     public void greetPet() {
         System.out.println("Hello" + pet.nickname);
     }
+
     public void describePet() {
-         String sly = "";
+        String sly = "";
         if (pet.trickLevel > 50) {
             sly = "very sly";
         } else {
             sly = "almost not sly";
         }
-        System.out.println("I have an " + pet.species + "is " + pet.age + " years old, he is "+ sly);
+        System.out.println("I have an " + pet.species + "is " + pet.age + " years old, he is " + sly);
     }
+
     public String toString() {
         return "Human{name='" + name + "', surname='" + surname + "', year=" + year + ", iq=" + iq +
                 ", mother=" + (mother != null ? mother.name + " " + mother.surname : "") +
                 ", father=" + (father != null ? father.name + " " + father.surname : "") +
                 ", pet=" + (pet != null ? pet.toString() : "") + "}";
     }
+
+    public boolean feedPet(boolean isTimeToFeed) {
+        if (isTimeToFeed) {
+            System.out.println("Hm... I will feed " + name + "'s " + pet.species);
+            return true;
+        } else {
+            Random random = new Random();
+            int randomNum = random.nextInt(101); // Generate a number between 0-100
+
+            if (pet.trickLevel > randomNum) {
+                System.out.println("Hm... I will feed " + name + "'s " + pet.species);
+                return true;
+            } else {
+                System.out.println("I think " + name + "'s " + pet.species + " is not hungry.");
+                return false;
+            }
+        }
+
+    }
 }
+
