@@ -11,5 +11,6 @@ public class Main {
         pet.respond();
         pet.foul();
         pet.foul();
+        System.out.println(child.feedPet(false));
     }
 }
